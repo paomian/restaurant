@@ -1,5 +1,9 @@
 *.log
 *.pot
 *.pyc
+<<<<<<< HEAD
 *.py~
 settings.py
+=======
+local_settings.py
+>>>>>>> f51fd028b450b0fdbc4511f6e9a3d9fd37f215b6
