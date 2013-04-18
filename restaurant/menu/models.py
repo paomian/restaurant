@@ -58,7 +58,11 @@ class Customer(models.Model):
 	time = models.DateTimeField("就餐时间",)
 	def __unicode__(self):
 		return unicode(self.id) 
+<<<<<<< HEAD
 class bill(models.Model):
+=======
+class Menu(models.Model):
+>>>>>>> 26c34bc4adb5e716f89cc7c784eddc8164fca455
 	date = models.DateTimeField("时间",)
 	consumption= models.DecimalField("总消费",max_digits=5,decimal_places=0)
 	chair = models.DecimalField("椅子数",max_digits=2,decimal_places=0)
