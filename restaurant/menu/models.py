@@ -52,19 +52,14 @@ class Desk(models.Model):             #餐桌
 #	description = models.TextField("备注",null=True)
 #	customer_id = models.DecimalField(max_digits=2,decimal_places=0)
 #	def __unicode__(self):
-#		return unicode(self.id) 
+#		return unicode(self.id)
 class Customer(models.Model):
 	customer_num = models.DecimalField(max_digits=3,decimal_places=0)
 	time = models.DateTimeField("就餐时间",)
 	def __unicode__(self):
-		return unicode(self.id) 
-<<<<<<< HEAD
-class bill(models.Model):
-=======
-class Menu(models.Model):
->>>>>>> 26c34bc4adb5e716f89cc7c784eddc8164fca455
+		return unicode(self.id)
+class Bill(models.Model):
 	date = models.DateTimeField("时间",)
-	consumption= models.DecimalField("总消费",max_digits=5,decimal_places=0)
 	chair = models.DecimalField("椅子数",max_digits=2,decimal_places=0)
 	tableware = models.DecimalField("餐具数",max_digits=2,decimal_places=0)
 	description = models.TextField("备注",null=True,blank=True)
@@ -86,5 +81,16 @@ class Dishship(models.Model):
 	customer = models.ForeignKey(Customer)
 	time = models.DateTimeField()
 	dish_num = models.DecimalField("菜品数",max_digits=2,decimal_places=0)
+	consumption= models.DecimalField("菜品总消费",max_digits=5,decimal_places=0)
 	def __unicode__(self):
 		return unicode(self.desk)
+class menu(object):
+    def __inti__(self, *args, **kwargs):
+        slif.items = []
+        self.total_price = 0
+    def add_dish(self,Dish):
+        self.total_price += Dish.price
+        for itme in self.items:
+            if item.Dish.id == Dish.id:
+                item.quantity += 1
+        return self.item.append(LineItem(Dish=Dish,unit_price=Dish.price))
