@@ -12,16 +12,16 @@
         <div class="row" style="padding-top:10">
                 <div class="span2">
                         <a href="#">
-                                <img class="thumbnail" src="{{item.mug_shot.url}}" alt="">
+                        <img class="thumbnail" src="{{item.photo.url}}" alt="">
                         </a>
                 </div>
                 <div class="span8">
-                        <h4>{{item.title}}</h4>
-                        {{item.name}}
+                        <h4>{{item.name}}</h4>
+                        {{item.description}}
                 </div>
                 <div class="span2" style="align:right">
-                        <p><a class="btn primary" href="{% url 'depotapp.views.view_product' item.id %}">查看</a></a> </p>
-                <p><a class="btn btn-success" href="{% url 'depotapp.views.edit_product' item.id %}">编辑</a> </p>
+                        <p><a class="btn primary" href="#">查看</a></a> </p>
+                <p><a class="btn btn-success" href="#">编辑</a> </p>
                 <p><a class="btn btn-danger" href="#">删除</a></p>
         </div>
 </div>
@@ -38,7 +38,7 @@
 <a href="?page={{ list_items.next_page_number }}">下一页</a>
 {% endif %}
 <p align="right">
-<a href="{% url 'depotapp.views.create_product' %}">新增产品</a>
+<a href="{% url 'menu.views.create_dish' %}">新增产品</a>
 </p>
 {% endblock %}
 

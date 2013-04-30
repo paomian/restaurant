@@ -24,10 +24,8 @@ class Dish(models.Model):              #菜类
 	description = models.TextField("菜品介绍",null=True,blank=True)
 	category = models.DecimalField("分类",max_digits=2,decimal_places=0,choices=CATEGORY_CHOICE)
 	be_chice = models.DecimalField("被点数",max_digits=10,decimal_places=0)
-#	desk = models.ForeignKey()
 	def __unicode__(self):
 		return unicode(self.name)
-#	desk_id = models.DecimalField(max_digits=2,decimal_places=0)
 class Desk(models.Model):             #餐桌
 	be_useing = 1
 	wait = 2
@@ -42,46 +40,20 @@ class Desk(models.Model):             #餐桌
 	chair = models.DecimalField("椅子数",max_digits=2,decimal_places=0)
 	description = models.TextField("备注",null=True,blank=True)
 	dish = models.ManyToManyField(Dish,through='Dishship')
-#	dish = models.ForeignKey(Desk_Dish)
-#	room_id = models.DecimalField(max_digits=2,decimal_places=0)
 	def __unicode__(self):
 		return unicode(self.id)
-#class Room(models.Model):             #房间
-#	desk_num = models.DecimalField("桌子编号",max_digits=2,decimal_places=0)
-#	desk = models.ForeignKey(Desk)
-#	description = models.TextField("备注",null=True)
-#	customer_id = models.DecimalField(max_digits=2,decimal_places=0)
-#	def __unicode__(self):
-#		return unicode(self.id)
 class Customer(models.Model):
 	customer_num = models.DecimalField(max_digits=3,decimal_places=0)
 	time = models.DateTimeField("就餐时间",)
+	consumption= models.DecimalField("菜品总消费",max_digits=5,decimal_places=0)
 	def __unicode__(self):
 		return unicode(self.id)
-class Bill(models.Model):
-	date = models.DateTimeField("时间",)
-	chair = models.DecimalField("椅子数",max_digits=2,decimal_places=0)
-	tableware = models.DecimalField("餐具数",max_digits=2,decimal_places=0)
-	description = models.TextField("备注",null=True,blank=True)
-	customer = models.ForeignKey(Customer)
-	def __unicode__(self):
-		return unicode(self.id)
-#class Relationships(models.Model):
-#	desk = models.ForeignKey(Desk)
-#	dish = models.ForeignKey(Dish)
-#	customer = models.ForeignKey(Customer)
-#	class Meta:
-#		unique_together = ('desk','dish','customer')
-#	dish_num = models.DecimalField("菜品数量",max_digits=2,decimal_places=0)
-#	def __unicode__(self):
-#		return unicode(self.customer)
 class Dishship(models.Model):
 	dish = models.ForeignKey(Dish)
 	desk = models.ForeignKey(Desk)
-	customer = models.ForeignKey(Customer)
 	time = models.DateTimeField()
 	dish_num = models.DecimalField("菜品数",max_digits=2,decimal_places=0)
-	consumption= models.DecimalField("菜品总消费",max_digits=5,decimal_places=0)
+    money = models.DecimalField("小计",max_digits=3,decimal_places=1)
 	def __unicode__(self):
 		return unicode(self.desk)
 class menu(object):
@@ -93,4 +65,4 @@ class menu(object):
         for itme in self.items:
             if item.Dish.id == Dish.id:
                 item.quantity += 1
-        return self.item.append(LineItem(Dish=Dish,unit_price=Dish.price))
+        return self.item.append(Dishship(dish=Dish,unit_price=Dish.price,quantity=1))
