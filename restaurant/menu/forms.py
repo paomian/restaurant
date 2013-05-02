@@ -9,5 +9,6 @@ def endswith(s,*endings):
 class DishForm(forms.ModelForm):
     class Meta:
         model = Dish
+        exclude = ('be_chice',)
     def __init__(self, *args, **kwargs):
         super(DishForm,self).__init__(*args, **kwargs)

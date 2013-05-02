@@ -1,15 +1,16 @@
 {% extends "base.html" %}
 
 {% block title %} 新建菜品 {% endblock %}
-
-{% block heading %}<h1>  新建菜品 </h1>  {% endblock %}
+{% block heading %}<h1><center>新建菜品<center></h1>  {% endblock %}
 {% block content %} 
+<div style="width:100%;margin-left:40%">
 <table>
 <form action="" method="POST"> {% csrf_token %}
   {{form}}
   <tr>
-    <td colspan="2" align="right"><input type="submit" value="Create"/></td>
+    <td colspan="2" align="center"><input type="submit" value="Create" class="btn btn-success"/></td>
   </tr>
 </form>
 </table>
+</div>
 {% endblock %}

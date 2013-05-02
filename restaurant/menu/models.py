@@ -24,7 +24,7 @@ class Dish(models.Model):              #菜类
     photo = models.ImageField("菜品图片",upload_to='dish_photo',null=True,blank=True)
     description = models.TextField("菜品介绍",null=True,blank=True)
     category = models.DecimalField("分类",max_digits=2,decimal_places=0,choices=CATEGORY_CHOICE)
-    be_chice = models.DecimalField("被点数",max_digits=10,decimal_places=0)
+    be_chice = models.DecimalField("被点数",max_digits=10,decimal_places=0,default=0)
     def __unicode__(self):
         return unicode(self.name)
 #class Desk(models.Model):             #餐桌

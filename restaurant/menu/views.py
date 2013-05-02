@@ -25,7 +25,7 @@ def logout_view(request):
     logout(request)
     print "logout secccess!"
 def create_dish(request):
-	form = DishForm(request.POST or None)
+	form = DishForm(request.POST,request.FILES or None)
 	if form.is_valid():
 		form.save()
 		form = DishForm()
