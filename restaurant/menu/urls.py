@@ -6,4 +6,5 @@ from resource import *
 urlpatterns = patterns('',
 		(r'create/$',create_dish),
         (r'list/$',list_dish),
+        (r'login/$',login_view),
 		)

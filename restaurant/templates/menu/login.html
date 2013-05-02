@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %} 用户登陆 {% endblock %}
+{% block heading %}<h1><center>用户登陆<center></h1>{% endblock %}
+{% block content %} 
+<div style="width:100%;margin-left:40%">
+        <form action="" method='POST' class="pull-center">
+                {% csrf_token %}
+                <p>用户名：<input name='username'  type="text" placeholder="用户名"></p>
+                <p>密  码：<input name='password'  type="password" placeholder="密码"></p>
+                <button class="btn" type="submit">登录</button>
+        </form>
+</div>
+{% endblock %}

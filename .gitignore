@@ -2,10 +2,5 @@
 *.pot
 *.pyc
 *.py~
-<<<<<<< HEAD
 settings.py
 dish_photo
-=======
->>>>>>> 26c34bc4adb5e716f89cc7c784eddc8164fca455
-=======
-local_settings.py
