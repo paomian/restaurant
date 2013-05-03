@@ -6,3 +6,4 @@ from restaurant.menu.models import *
 admin.site.register(Dish)
 #admin.site.register(Desk)
 admin.site.register(Dishship)
+admin.site.register(MyUser)

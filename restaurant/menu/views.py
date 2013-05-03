@@ -83,6 +83,6 @@ def edit_dish(request, id):
     if form.is_valid():
         form.save()
         return HttpResponse('<script>alert("edit success!");top.location="/menu/list/";</script>')
-    t=get_template('menu/create_dish.html')
+    t=get_template('menu/edit_dish.html')
     c=RequestContext(request,locals())
     return HttpResponse(t.render(c))

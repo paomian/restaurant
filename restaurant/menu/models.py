@@ -44,8 +44,10 @@ class Desk(models.Model):             #餐桌
 	def __unicode__(self):
 		return unicode(self.id)
 class MyUser(AbstractBaseUser):
+    name = models.CharField("姓名",max_length=20,unique=True,db_index=True)
     consumption= models.DecimalField("菜品总消费",max_digits=5,decimal_places=0)
     times = models.DecimalField("消费次数",max_digits=4,decimal_places=0)
+    USERNAME_FIELD = 'name'
     def __unicode__(self):
         return unicode(self.id)
 class MyUser_data(models.Model):
