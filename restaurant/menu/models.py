@@ -27,22 +27,22 @@ class Dish(models.Model):              #菜类
     be_chice = models.DecimalField("被点数",max_digits=10,decimal_places=0,default=0)
     def __unicode__(self):
         return unicode(self.name)
-#class Desk(models.Model):             #餐桌
-#	be_useing = 1
-#	wait = 2
-#	cleaning = 3
-#	BEHAVIOUR_CHOICE = (
-#			(be_useing,'正在使用'),
-#			(wait,'等待中'),
-#			(cleaning,'清理中'),
-#			)
-#	behaviour = models.DecimalField("状态",max_digits=1,decimal_places=0,choices=BEHAVIOUR_CHOICE)
-#	max_person = models.DecimalField("承受最大人数",max_digits=2,decimal_places=0)
-#	chair = models.DecimalField("椅子数",max_digits=2,decimal_places=0)
-#	description = models.TextField("备注",null=True,blank=True)
-#	dish = models.ManyToManyField(Dish,through='Dishship')
-#	def __unicode__(self):
-#		return unicode(self.id)
+class Desk(models.Model):             #餐桌
+	be_useing = 1
+	wait = 2
+	cleaning = 3
+	BEHAVIOUR_CHOICE = (
+			(be_useing,'正在使用'),
+			(wait,'等待中'),
+			(cleaning,'清理中'),
+			)
+	behaviour = models.DecimalField("状态",max_digits=1,decimal_places=0,choices=BEHAVIOUR_CHOICE)
+	max_person = models.DecimalField("承受最大人数",max_digits=2,decimal_places=0)
+	chair = models.DecimalField("椅子数",max_digits=2,decimal_places=0)
+	description = models.TextField("备注",null=True,blank=True)
+	dish = models.ManyToManyField(Dish,through='Dishship')
+	def __unicode__(self):
+		return unicode(self.id)
 class MyUser(AbstractBaseUser):
     consumption= models.DecimalField("菜品总消费",max_digits=5,decimal_places=0)
     times = models.DecimalField("消费次数",max_digits=4,decimal_places=0)
@@ -56,7 +56,7 @@ class MyUser_data(models.Model):
         return unicode(self.user)
 class Dishship(models.Model):
     dish = models.ForeignKey(Dish)
-#	desk = models.ForeignKey(Desk)
+    desk = models.ForeignKey(Desk)
 #	time = models.DateTimeField()
     dish_num = models.DecimalField("菜品数",max_digits=2,decimal_places=0)
     money = models.DecimalField("小计",max_digits=3,decimal_places=1)

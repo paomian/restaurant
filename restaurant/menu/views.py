@@ -9,7 +9,6 @@ from django.contrib.auth import authenticate, login, logout
 from models import *
 from forms import *
 
-@login_required
 def login_view(request):
     if request.method == "POST":
         username = request.POST['username']
@@ -27,9 +26,10 @@ def login_view(request):
     t = get_template('menu/login.html')
     c = RequestContext(request, locals())
     return HttpResponse(t.render(c))
+@login_required
 def logout_view(request):
     logout(request)
-    print "logout secccess!"
+    return HttpResponse('<script>alert("logout success!");top.location="/menu/accounts/login/";</script>')
 @login_required
 def create_dish(request):
     form = DishForm()
