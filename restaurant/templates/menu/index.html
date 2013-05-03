@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}欢迎来到泡面餐厅{% endblock %}
+{% block heading %}<h1><center>Welcome<center></h1>{% endblock %}
+{% block content %} 
+<div style="width:100%;margin-left:32%">
+        <!--<form action="" method='POST' class="pull-center">
+                <p>用户名：<input name='username'  type="text" placeholder="用户名"></p>
+                <p>密  码：<input name='password'  type="password" placeholder="密码"></p>
+                <button class="btn" type="submit">登录</button>
+        </form>-->
+        <div style="height:100px"></div>
+        <form action="" class="form-horizontal" method='POST'>{% csrf_token %}
+                <div class="control-group">
+                        <label class="control-label" for="inputUsername">Username</label>
+                        <div class="controls">
+                                <input name='username' type="text" id="inputEmail" placeholder="Username">
+                        </div>
+                </div>
+                <div class="control-group">
+                        <label class="control-label" for="inputPassword">Password</label>
+                        <div class="controls">
+                                <input name='password' type="password" id="inputPassword" placeholder="Password">
+                        </div>
+                </div>
+                <div class="control-group">
+                        <div class="controls">
+                                <label class="checkbox">
+                                        <input type="checkbox"> Remember me
+                                </label>
+                                <button type="submit" class="btn">Sign in</button>
+                        </div>
+                </div>
+        </form>
+</div>
+{% endblock %}
