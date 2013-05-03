@@ -15,7 +15,8 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^api-auth/',include('rest_framework.urls', namespace='rest_framework'))
+    url(r'^api-auth/',include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^$','restaurant.menu.views.index_view'),
 )
 urlpatterns += patterns('',
 		(r'^menu/', include('restaurant.menu.urls')),

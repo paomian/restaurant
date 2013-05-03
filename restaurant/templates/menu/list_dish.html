@@ -21,7 +21,7 @@
                 </div>
                 <div class="span2" style="align:right">
                         <p><a class="btn primary" href="#">查看</a></a> </p>
-                <p><a class="btn btn-success" href="#">编辑</a> </p>
+                <p><a class="btn btn-success" href="{% url 'menu.views.edit_dish' item.id %}">编辑</a> </p>
                 <p><a class="btn btn-danger" href="#">删除</a></p>
         </div>
 </div>

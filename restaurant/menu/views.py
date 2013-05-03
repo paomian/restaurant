@@ -8,8 +8,15 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth import authenticate, login, logout
 from models import *
 from forms import *
-
+def index_view(request):
+    t = get_template('menu/index1.html')
+    c = RequestContext(request, locals())
+    return HttpResponse(t.render(c))
 def login_view(request):
+#    if request.user.is_active:
+#        return HttpResponse('<script>alert("you are already login");top.location="/menu/list/";</script>')
+    if request.user.is_authenticated():
+        return HttpResponse('<script>alert("you are already login");top.location="/menu/list/";</script>')
     if request.method == "POST":
         username = request.POST['username']
         password = request.POST['password']
@@ -70,3 +77,12 @@ def view_bill(request):
 
         c = RequestContext(request,locals())
         return HttpResponse(t.rande(c))
+def edit_dish(request, id):
+    dish_instance = Dish.objects.get(id=id)
+    form = DishForm(request.POST or request.FILES or None, instance = dish_instance)
+    if form.is_valid():
+        form.save()
+        return HttpResponse('<script>alert("edit success!");top.location="/menu/list/";</script>')
+    t=get_template('menu/create_dish.html')
+    c=RequestContext(request,locals())
+    return HttpResponse(t.render(c))
