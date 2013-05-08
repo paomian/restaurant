@@ -1,6 +1,6 @@
 #coding=utf-8
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin,BaseUserManager
 # Create your models here.
 class Dish(models.Model):              #菜类
     soup = 1
@@ -43,16 +43,46 @@ class Desk(models.Model):             #餐桌
 	dish = models.ManyToManyField(Dish,through='Dishship')
 	def __unicode__(self):
 		return unicode(self.id)
-class MyUser(AbstractBaseUser):
-    name = models.CharField("姓名",max_length=20,unique=True,db_index=True)
-    consumption= models.DecimalField("菜品总消费",max_digits=5,decimal_places=0)
-    times = models.DecimalField("消费次数",max_digits=4,decimal_places=0)
+class MyUserManager(BaseUserManager):
+    def create_user(self, name, email, password=None):
+        if not name:
+            raise ValueError('User must have a name')
+        if not email:
+            raise ValueError('User must have an email address')
+        user = self.model(
+                name = name,
+                email = email,)
+
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+    def create_superuser(self, name , email, password):
+        user = self.create_user(name,
+                email = email,
+                password = password,
+                )
+        user.is_admin = True
+        user.save(using.self._db)
+        return user
+class MyUser(AbstractBaseUser, PermissionsMixin):
+    name = models.CharField("姓名", max_length=20, unique=True, db_index=True)
+    consumption= models.DecimalField("菜品总消费", max_digits=5, decimal_places=0)
+    email = models.EmailField(max_length=75)
+    times = models.DecimalField("消费次数", max_digits=4, decimal_places=0)
     USERNAME_FIELD = 'name'
+    REQUIRED_FIELDS = ['email', ]
+ #   is_staff = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=True)
+    is_admin = models.BooleanField(default=False)
+    @property
+    def is_staff(self):
+        return self.is_admin
     def __unicode__(self):
-        return unicode(self.id)
+        return unicode(self.name)
+
 class MyUser_data(models.Model):
-    time = models.DateTimeField("就餐时间",)
-    cost = models.DecimalField("本次消费",max_digits=6,decimal_places=2)
+    time = models.DateTimeField("就餐时间", )
+    cost = models.DecimalField("本次消费", max_digits=6, decimal_places=2)
     user = models.OneToOneField(MyUser)
     def __unicode__(self):
         return unicode(self.user)
